@@ -1,5 +1,4 @@
 import express, { json } from "express";
-import db from "./database/database.js";
 import authRoutes from "./routes/auth.js";
 import jobsRoutes from "./routes/jobs.js";
 import applicationsRoutes from "./routes/applications.js";
