@@ -1,10 +1,10 @@
 // this file initializes the database schema for the job board application
 import fs from "fs";
-import db from "../database/database.js";
+import db from "./database/database.js";
 
 try {
   const schemaSQL = fs.readFileSync(
-    new URL("../sql/schema.sql", import.meta.url),
+    new URL("./sql/schema.sql", import.meta.url),
     "utf8"
   );
   db.exec(schemaSQL, (err) => {
