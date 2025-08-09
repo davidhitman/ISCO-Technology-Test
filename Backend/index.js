@@ -8,6 +8,11 @@ dotenv.config();
 import cors from "cors";
 
 const app = express();
+
+app.get("/", (_req, res) => {
+  res.send("API is running. Try /api/jobs");
+});
+
 app.use(cors());
 app.use(json());
 
