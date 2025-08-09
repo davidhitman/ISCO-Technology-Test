@@ -3,7 +3,7 @@
 import sqlite3Pkg from "sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
-import bcrypt from "bcrypt"; // make sure bcrypt is installed
+import bcrypt from "bcrypt";
 
 const sqlite3 = sqlite3Pkg.verbose();
 const __filename = fileURLToPath(import.meta.url);
@@ -64,8 +64,8 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
     `);
 
     // Seed admin user if not exists
-    const adminEmail = "admin@example.com";
-    const adminPassword = await bcrypt.hash("admin123", 10);
+    const adminEmail = "david@gmail.com";
+    const adminPassword = await bcrypt.hash("david123", 10);
 
     db.get("SELECT * FROM users WHERE email = ?", [adminEmail], (err, row) => {
       if (err) {
@@ -75,23 +75,23 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
           `INSERT INTO users (fullName, username, email, password, phoneNumber, role)
              VALUES (?, ?, ?, ?, ?, ?)`,
           [
-            "System Administrator",
-            "admin",
+            "David Hitimana",
+            "david",
             adminEmail,
             adminPassword,
-            "0000000000",
+            "+250788123456",
             "admin",
           ],
           (err) => {
             if (err) {
               console.error("Error inserting admin:", err.message);
             } else {
-              console.log("✅ Admin user created:", adminEmail);
+              console.log("Admin user created:", adminEmail);
             }
           }
         );
       } else {
-        console.log("ℹ️ Admin user already exists:", adminEmail);
+        console.log("Admin user already exists:", adminEmail);
       }
     });
 
