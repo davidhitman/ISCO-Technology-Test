@@ -8,6 +8,9 @@
     "dev": "nodemon index.js",
     "test": "cross-env NODE_ENV=test DB_PATH=./database/job_board.test.db node --experimental-vm-modules ./node_modules/jest/bin/jest.js --runInBand"
   },
+  "engines": {
+    "node": ">=14.0.0"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
