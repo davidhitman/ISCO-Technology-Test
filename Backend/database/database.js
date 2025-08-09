@@ -3,6 +3,7 @@
 import sqlite3Pkg from "sqlite3";
 import path from "path";
 import { fileURLToPath } from "url";
+import bcrypt from "bcrypt"; // make sure bcrypt is installed
 
 const sqlite3 = sqlite3Pkg.verbose();
 const __filename = fileURLToPath(import.meta.url);
@@ -18,7 +19,7 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
   }
   console.log("Database Connected OK");
 
-  db.serialize(() => {
+  db.serialize(async () => {
     db.run("PRAGMA foreign_keys = ON;");
     db.run("PRAGMA journal_mode = WAL;");
     db.run("PRAGMA busy_timeout = 5000;");
@@ -61,6 +62,38 @@ const db = new sqlite3.Database(DB_PATH, (err) => {
         FOREIGN KEY (userId) REFERENCES users(id)
       );
     `);
+
+    // Seed admin user if not exists
+    const adminEmail = "admin@example.com";
+    const adminPassword = await bcrypt.hash("admin123", 10);
+
+    db.get("SELECT * FROM users WHERE email = ?", [adminEmail], (err, row) => {
+      if (err) {
+        console.error("Error checking admin:", err.message);
+      } else if (!row) {
+        db.run(
+          `INSERT INTO users (fullName, username, email, password, phoneNumber, role)
+             VALUES (?, ?, ?, ?, ?, ?)`,
+          [
+            "System Administrator",
+            "admin",
+            adminEmail,
+            adminPassword,
+            "0000000000",
+            "admin",
+          ],
+          (err) => {
+            if (err) {
+              console.error("Error inserting admin:", err.message);
+            } else {
+              console.log("✅ Admin user created:", adminEmail);
+            }
+          }
+        );
+      } else {
+        console.log("ℹ️ Admin user already exists:", adminEmail);
+      }
+    });
 
     // Print tables to confirm
     db.all(`SELECT name FROM sqlite_master WHERE type='table'`, (err, rows) => {
