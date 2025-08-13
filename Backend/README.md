@@ -1,30 +1,7 @@
-End points created so far
+The ISCO Job Board backend is a Node.js and Express REST API that powers a simple job posting and application platform. It uses SQLite for storage and JWT-based authentication with role support for user and admin. Users can register, log in, browse jobs, apply for positions, and track their applications, while admins have additional privileges such as posting, editing, and deleting jobs, reviewing applications, updating their statuses, and managing user accounts. The database schema includes users, jobs, and applications tables, all automatically created on first run with a seeded default admin account.
 
-1. User SignUp
-2. User Login
-3. Admin SignUp admin
-4. create Job posting admin
-5. update Job posting admin
-6. delete Job posting admin
-7. view all the Jobs posting with pagination
-8. view one job posting
-9. filter by location, title, employmentType, and the time range the job was posted in e.g week or month
-10. apply for a job
-11. view application made and check the status
-12. view applications made per job admin
-13. view how may applications were made per job admin
-14. update application status admin
-15. delete application admin
-16. Delete accounts by Admin
-17. user can delete they account
-18. list all users Admin
-19. view all applications across the platform admin
-20. view all applications from a specific user admin
-21. update your own profile
+The API is organized into clear route groups: /auth handles user and admin authentication and registration, /jobs manages job listings and filtering, /applications provides application submission and tracking features, and /users covers account management. Authentication is required for protected routes, and admin-only operations are enforced via middleware. All requests and responses are JSON-based, and pagination and filtering options are available where appropriate. Tests are included via Jest and Supertest, covering authentication, jobs, applications, and user operations using a separate test database.
 
-TODO NOW ()
+While the backend runs locally with persistent data, the Heroku deployment uses SQLite, which is ephemeral—meaning data will reset when dynos restart or the app is redeployed. For production use, replacing SQLite with a persistent database like PostgreSQL is recommended. Developers can start the API by installing dependencies, setting environment variables (PORT, JWT_SECRET, and optional DB_PATH), and running npm run dev. The API is designed to integrate cleanly with a React or similar frontend for a complete job board experience.
 
-1. Error handling and input validation.
-2. Host Backend and upload it on Github
-
-to run the sql schema, is to run it separatly to create the tables.
+When the application runs it seeds (automatically creates an admin profile, with username: david and password david123)

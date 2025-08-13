@@ -56,7 +56,7 @@ router.get("/mine", authenticate, (req, res) => {
     const totalPages = Math.ceil(totalApplications / limit);
 
     const sql = `
-      SELECT a.*, j.title, j.company FROM applications a
+      SELECT a.*, j.title, j.company, j.location FROM applications a
       JOIN jobs j ON a.jobId = j.id
       WHERE a.userId = ?
       ORDER BY appliedAt DESC
