@@ -6,4 +6,7 @@ The backend is a REST API using Express and SQLite for storage. It is divided in
 
 Together, this stack provides a fully functional job board platform, easily deployable and adaptable. The backend runs on Heroku, the frontend on Vercel, and both communicate securely through authenticated API requests. This separation of concerns ensures scalability, maintainability, and a smooth developer experience.
 
+Since the backend is deployed on heroku, at the start of everyday the database contents are deleted, except for the seeded(initial) admin details. so all the jobs created and users registered will be deleted and you will have to create new ones.
+and more additional things to upgrade on my website include frontend testing which I did not do because of limited time, and a strong entry validation, the one I used was basic. 
+
 The Login details of a intial admin user are username:david and password:david123
