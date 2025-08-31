@@ -10,3 +10,5 @@ Since the backend is deployed on heroku, at the start of everyday the database c
 and more additional things to upgrade on my website include frontend testing which I did not do because of limited time, and a strong entry validation, the one I used was basic. 
 
 The Login details of a intial admin user are username:david and password:david123
+
+Link to the deployed website: https://job-board-5iopg93t8-david-hitimanas-projects.vercel.app 
